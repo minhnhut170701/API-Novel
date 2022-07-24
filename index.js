@@ -284,4 +284,4 @@ app.get("/cover/list/td", (req, resp) =>{
 
 
 
-app.listen(3001, () => console.log('server runing'))
+app.listen(process.env.PORT || 3001, () => console.log('server runing'))
