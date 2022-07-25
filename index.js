@@ -32,6 +32,7 @@ app.get('/cover/new', (req, resp) =>{
             const author = $(this).find('.state-box > .author').text()
             const category = $(this).find('.state-box > a > i').text()
             const image = $(this).find('.book-img > a > img').attr('src')
+            const link = $(this).find('.book-img > a').attr('href')
             
             thumbnail.push({
                 id: Math.floor(Math.random() * 100),
@@ -39,7 +40,8 @@ app.get('/cover/new', (req, resp) =>{
                 infor: infor,
                 author: author,
                 category: category,
-                image: image
+                image: image,
+                link: link
             })
         })
         thumbnail.shift()
@@ -64,13 +66,15 @@ const data = []
             const author = $(this).find('.state-box > .author').text()
             const category = $(this).find('.state-box > a > i').text()
             const image = $(this).find('.book-img > a > img').attr('src')
+            const link = $(this).find('.book-img > a').attr('href')
             data.push({
                 id: Math.floor(Math.random() * 100),
                 name: name,
                 infor: infor,
                 author: author,
                 category: category,
-                image: image
+                image: image,
+                link: link
             })
         })
         data.shift()
@@ -270,6 +274,35 @@ app.get("/cover/list/td", (req, resp) =>{
                     update: update,
                     image: image,
                     chap: chap,
+                    link: link
+                })
+            
+            })
+            
+            resp.status(200).json(data)
+        })
+       } catch (error) {
+        console.log(error)
+       }
+})
+
+// GET data top coverter
+app.get("/top/coventer", (req, resp) =>{
+    const data = []
+       try {
+        axios(URL_THEODOI).then((res) =>{
+            const html = res.data;
+            const $ = cheerio.load(html)
+            $(".update-rec-list ul li", html).each(function(){
+                const top = $(this).find(".no").text()
+                const number = $(this).find("span").text()
+                const name = $(this).find("a").text()
+                const link = $(this).find('a').attr('href')
+                data.push({
+                    id: top,
+                    top: top,
+                    number: number,
+                    name: name,
                     link: link
                 })
             
