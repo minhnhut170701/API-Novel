@@ -290,10 +290,10 @@ app.get("/cover/list/td", (req, resp) =>{
 app.get("/top/coventer", (req, resp) =>{
     const data = []
        try {
-        axios(URL_THEODOI).then((res) =>{
+        axios(URL).then((res) =>{
             const html = res.data;
             const $ = cheerio.load(html)
-            $(".update-rec-list ul li", html).each(function(){
+            $(".update-rec-wrap .update-rec-list li", html).each(function(){
                 const top = $(this).find(".no").text()
                 const number = $(this).find("span").text()
                 const name = $(this).find("a").text()
