@@ -81,7 +81,7 @@ const data = []
    }
 })
 
-// GET data list book
+// GET data list book update
 app.get("/cover/list", (req, resp) =>{
     const data = []
        try {
@@ -94,6 +94,7 @@ app.get("/cover/list", (req, resp) =>{
                 const chap = $(this).find('.section').text();
                 const author = $(this).find('.author').text();
                 const time = $(this).find('.respon > i').text();
+                const link = $(this).find('.name').attr('href')
                 data.push({
                     id: Math.floor(Math.random() * 100),
                     name: name,
@@ -101,6 +102,7 @@ app.get("/cover/list", (req, resp) =>{
                     chap: chap,
                     author: author,
                     time: time,
+                    link: link
                 })
             })
             data.shift()
