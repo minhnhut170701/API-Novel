@@ -301,7 +301,7 @@ app.get("/top/coventer", (req, resp) =>{
                 data.push({
                     id: top,
                     top: top,
-                    number: number,
+                    number: number.substring(1),
                     name: name,
                     link: link
                 })
